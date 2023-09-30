@@ -10,5 +10,5 @@ if not check(value):
     print("CPU is overloaded ")
 else:
     print("everything is ok ")
-
+print('end of code')
 
