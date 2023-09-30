@@ -1,0 +1,13 @@
+--- check1.py	2023-09-30 09:58:41.257801977 +0500
++++ check2.py	2023-09-30 09:59:00.090654835 +0500
+@@ -2,8 +2,8 @@
+ import psutil
+ 
+ def check(percetage):
+-    usage=psutil.cpu_percent()
+-    print()
++    usage=psutil.cpu_percent(1)
++    print("Bug: {} ".format(usage))
+     return usage<percetage
+ value=int(input("Check percetage: "))
+ if not check(value):
