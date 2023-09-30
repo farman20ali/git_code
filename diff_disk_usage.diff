@@ -1,0 +1,15 @@
+--- disk_usage_original.py	2023-09-30 14:34:12.135531137 +0500
++++ disk_usage_fixed.py	2023-09-30 14:39:33.279247564 +0500
+@@ -13,9 +13,9 @@
+     return True
+ 
+ #check for at least 2gb and 18%free
+-if not checkdiskusage('/',2*2**30,18):
++if not checkdiskusage('/',2,18):
+     print("Error: Not enough disk space")
+-    return 1
++    sys.exit(1)
+ 
+ print("everything ok")
+-return 0
++sys.exit(0)
