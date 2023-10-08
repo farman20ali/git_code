@@ -12,10 +12,13 @@ def checkdiskusage(disk,min_gb, min_percent):
         return False
     return True
 
+def check_root_full():
+   """Returns True if the root partiition is full, False otherwise."""
+   return checkdiskusage('/',2,20);
 #check for at least 2gb and 18%free
 def main():
-    if not checkdiskusage('/',2,20):
-        print("Error: Not enough disk space")
+    if not check_root_full():
+        print("Error: Disk Full. Not enough disk space")
         sys.exit(1)
     print("everything ok")
     sys.exit(0)
