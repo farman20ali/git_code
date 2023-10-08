@@ -2,6 +2,7 @@
 import shutil
 import sys
 import os
+import socket
 
 def checkdiskusage(disk,min_gb, min_percent):
     """Returns true if there is enough free disk space, false otherwise"""
@@ -13,16 +14,25 @@ def checkdiskusage(disk,min_gb, min_percent):
         return True
     return False
 
+
 def reboot_check():
     return os.path.exists('/var/run/reboot-required')
-        
+
 def check_root_full():
    """Returns True if the root partiition is full, False otherwise."""
-   return checkdiskusage('/',2,20)
-    
-#Check for at least 2gb and 18% free
+   return checkdiskusage('/',2,20);
+
+def check_no_network():
+    """Returns True if it fails to resolve Google's URL, False Otherwise"""
+    try:
+        socket.gethostbyname("www.google.com")
+        return False
+    except:
+        return True
+
+#check for at least 2gb and 18% free
 def main():
-    checks=[(reboot_check,"reboot is required"),(check_root_full,"Disk is Full")]
+    checks=[(check_no_network,"no network connection"),(reboot_check,"reboot is required"),(check_root_full,"Disk is Full")]
     for method,msg in checks:
         error=False
         if method():
