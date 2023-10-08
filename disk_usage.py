@@ -14,14 +14,13 @@ def checkdiskusage(disk,min_gb, min_percent):
     return False
 
 def reboot_check():
-    if os.path.exists('/var/run/reboot-required'):
-        return True
-    else:
-        return False
+    return os.path.exists('/var/run/reboot-required')
+        
 def check_root_full():
    """Returns True if the root partiition is full, False otherwise."""
-   return checkdiskusage('/',2,20);
-#check for at least 2gb and 18%free
+   return checkdiskusage('/',2,20)
+    
+#Check for at least 2gb and 18% free
 def main():
     checks=[(reboot_check,"reboot is required"),(check_root_full,"Disk is Full")]
     for method,msg in checks:
